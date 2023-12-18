@@ -1,0 +1,50 @@
+{# templates/pomodoro_session/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Session Pomodoro{% endblock %}
+
+{% block body %}
+    <h1>Session Pomodoro</h1>
+    {# Affichage des détails de la session Pomodoro #}
+    <div>
+        <p>Status : {{ pomodoroSession.status }}</p>
+        <p>Début : {{ pomodoroSession.startTime|date('H:i:s') }}</p>
+        {% if pomodoroSession.task %}
+            <p>Tâche associée : {{ pomodoroSession.task.title }}</p>
+        {% endif %}
+    </div>
+
+    {# Boutons de contrôle de la session #}
+    {% if pomodoroSession.status == 'active' %}
+        <form action="{{ path('pomodoro_pause', {'id': pomodoroSession.id}) }}" method="post">
+            <button type="submit">Pause</button>
+        </form>
+    {% elseif pomodoroSession.status == 'paused' %}
+        <form action="{{ path('pomodoro_resume', {'id': pomodoroSession.id}) }}" method="post">
+            <button type="submit">Reprendre</button>
+        </form>
+    {% endif %}
+
+    {% if pomodoroSession.status == 'active' %}
+        <a href="{{ path('pomodoro_end', {'id': pomodoroSession.id}) }}" class="btn btn-danger">Terminer la session</a>
+    {% endif %}
+
+    {# Boutons pour la gestion des tâches #}
+    <div>
+        {# Bouton pour ajouter une tâche à la session Pomodoro #}
+        <a href="{{ path('task_link_pomodoro', {'pomodoroId': pomodoroSession.id}) }}" class="btn btn-primary">Ajouter une tâche à cette session</a>
+
+        {# Bouton pour éditer une tâche (si une tâche est associée) #}
+        {% if pomodoroSession.task %}
+            <a href="{{ path('task_edit_create', {'id': pomodoroSession.task.id}) }}" class="btn btn-secondary">Éditer la tâche associée</a>
+        {% endif %}
+
+        <a href="{{ path('pomodoro_session_tasks', {'id': pomodoroSession.id}) }}" class="btn btn-primary">
+            Gérer les Tâches
+        </a>
+
+        {# Bouton pour créer une nouvelle tâche (redirection vers le formulaire de création) #}
+        <a href="{{ path('task_edit_create') }}" class="btn btn-success">Créer une nouvelle tâche</a>
+    </div>
+{% endblock %}

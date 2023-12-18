@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Tâches{% endblock %}
+
+{% block body %}
+    <h1>Liste des Tâches</h1>
+
+    <ul>
+        {% for task in tasks %}
+            <li>
+                {{ task.title }}
+                - <a href="{{ path('task_edit_create', {'id': task.id}) }}">Éditer</a>
+                - <a href="{{ path('task_delete', {'id': task.id}) }}">Supprimer</a>
+                {% if currentPomodoroSessionId is not null %}
+                    - <a href="{{ path('task_link_pomodoro', {'taskId': task.id, 'pomodoroId': currentPomodoroSessionId}) }}">Lier à la session Pomodoro</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('task_edit_create') }}">Créer une nouvelle tâche</a>
+    <br>
+    <a href="{{ path('pomodoro_session', {'id': currentPomodoroSessionId}) }}">Retour à la session Pomodoro</a>
+    <br>
+    <a href="{{ path('pomodoro_home') }}">Retour à la page d'accueil</a>
+{% endblock %}

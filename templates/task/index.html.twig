@@ -1,0 +1,19 @@
+{# templates/task/edit.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{% if form.vars.value.id %}Edit{% else %}Create{% endif %} a Task</h1>
+
+    {{ form_start(form) }}
+
+    {{ form_row(form.title) }}
+    {{ form_row(form.status) }}
+
+
+    <button type="submit" class="btn btn-primary">
+        {% if form.vars.value.id %}Save Changes{% else %}Create Task{% endif %}
+    </button>
+    <a href="{{ path('task_list') }}" class="btn btn-secondary">Voir la liste des tâches</a>
+    {{ form_end(form) }}
+{% endblock %}

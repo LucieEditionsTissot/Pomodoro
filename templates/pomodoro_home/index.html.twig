@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Accueil Pomodoro</h1>
+s
+    <h2>Créer une Tâche</h2>
+    {{ form_start(taskForm) }}
+    {{ form_widget(taskForm) }}
+    <button type="submit">Créer Tâche</button>
+    {{ form_end(taskForm) }}
+    <a href="{{ path('task_list') }}" class="btn btn-secondary">Voir la liste des tâches</a>
+
+    <h2>Démarrer une Session Pomodoro</h2>
+    <a href="{{ path('pomodoro_start') }}">Démarrer Session</a>
+{% endblock %}
