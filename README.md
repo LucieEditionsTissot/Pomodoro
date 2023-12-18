@@ -26,7 +26,9 @@ Bien que le projet ne soit pas achevé, les compétences et la compréhension de
 
 1. Cloner le dépôt Git :
 
-git clone 
+git clone : https://github.com/LucieEditionsTissot/Pomodoro.git
+
+
 2. Installer les dépendances :
 
 composer install
@@ -37,12 +39,17 @@ composer install
 - Configurer la chaîne de connexion à la base de données SQLite dans `.env.local`.
 
 4. Créer la base de données :
-   php bin/console doctrine:database:create
+
+php bin/console doctrine:database:create
 
 5. Effectuer les migrations :
+
+
    php bin/console doctrine:migrations:migrate
 
 6. Lancer le serveur local :
+
+
    symfony server:start
 
 Made with love and pain by Lucie.
